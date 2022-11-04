@@ -1,0 +1,12 @@
+services:
+  deploy_runner:
+    image: s3-deploy-action
+    build:
+      context: .
+    environment:
+      - AWS_S3_BUCKET
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION
+      - S3_DESTINATION_DIR
+      - S3_SOURCE_DIR

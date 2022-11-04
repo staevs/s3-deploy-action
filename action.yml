@@ -1,0 +1,36 @@
+name: "S3/CloudFront Deploy"
+description: "Sync a directory to an AWS S3 repository and invalidate CloudFront cache."
+branding:
+  icon: upload-cloud
+  color: red
+author: staevs
+inputs:
+  AWS_ACCESS_KEY_ID:
+    description: "Access Key ID. A unique identifier that's associated with a secret access key"
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: "Secret Access Key. A key that's used with the access key ID to cryptographically sign programmatic AWS requests."
+    required: true
+  AWS_REGION:
+    description: "Your AWS Region"
+    required: true
+  AWS_S3_BUCKET:
+    description: "Your S3 Bucket name"
+    required: true
+  S3_SOURCE_DIR:
+    description: "Path to local folder"
+    required: true
+  S3_DESTINATION_DIR:
+    description: "Path to folder in a S3 bucket"
+    required: false
+    default: ""
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.AWS_ACCESS_KEY_ID }}
+    - ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+    - ${{ inputs.AWS_REGION }}
+    - ${{ inputs.AWS_S3_BUCKET }}
+    - ${{ inputs.S3_SOURCE_DIR }}
+    - ${{ inputs.S3_DESTINATION_DIR }}
