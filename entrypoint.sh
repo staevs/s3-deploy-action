@@ -1,6 +1,7 @@
 #!/bin/sh
 
 aws --version
+
 set -e
 
 if [ -z "$AWS_S3_BUCKET" ]; then
@@ -23,4 +24,9 @@ if [ -z "$AWS_REGION" ]; then
   exit 1
 fi
 
-aws s3 sync "${S3_SOURCE_DIR}" "s3://${AWS_S3_BUCKET}/${DESTINATION_DIR}" --follow-symlinks --delete
+sh -c "aws s3 sync $S3_SOURCE_DIR s3://$AWS_S3_BUCKET/$DESTINATION_DIR $*"
+
+if [ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+  echo "Creating CloudFront invalidation"
+  aws cloudfront create-invalidation --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" --paths "${CLOUDFRONT_PATHS:-/*}"
+fi
