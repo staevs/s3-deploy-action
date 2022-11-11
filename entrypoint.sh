@@ -24,9 +24,14 @@ if [ -z "$AWS_REGION" ]; then
   exit 1
 fi
 
+if [ -z "$S3_SOURCE_DIR" ]; then
+  echo "$S3_SOURCE_DIR is not set. Quitting."
+  exit 1
+fi
+
 if [ "$USE_GZIP" = true ]; then
   echo "Gzipping files..."
-  find "$S3_SOURCE_DIR" -type f -exec gzip "{}" \; -exec mv "{}.gz" "{}" \;
+  find "$PWD/$S3_SOURCE_DIR" -type f -exec gzip "{}" \; -exec mv "{}.gz" "{}" \;
 fi
 
 sh -c "aws s3 sync $S3_SOURCE_DIR s3://$AWS_S3_BUCKET/$DESTINATION_DIR $([ "$USE_GZIP" = true ] && echo "--content-encoding gzip" || echo "") $*"
