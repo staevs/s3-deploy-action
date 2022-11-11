@@ -29,12 +29,24 @@ if [ -z "$S3_SOURCE_DIR" ]; then
   exit 1
 fi
 
-if [ "$USE_GZIP" = true ]; then
+if [ "$USE_GZIP_COMPRESSION" = true ]; then
   echo "Gzipping files..."
-  find "$PWD/$S3_SOURCE_DIR" -type f -exec gzip "{}" \; -exec mv "{}.gz" "{}" \;
+  echo "./$S3_SOURCE_DIR"
+  echo "$PWD/$S3_SOURCE_DIR"
+  echo "$(pwd)/S3_SOURCE_DIR"
+
+  touch test.md
+
+  ls -la $S3_SOURCE_DIR
+
+  ls -la
+
+  find "./$S3_SOURCE_DIR" -type f -exec gzip "{}" \; -exec mv "{}.gz" "{}" \;
 fi
 
-sh -c "aws s3 sync $S3_SOURCE_DIR s3://$AWS_S3_BUCKET/$DESTINATION_DIR $([ "$USE_GZIP" = true ] && echo "--content-encoding gzip" || echo "") $*"
+echo "Uploading files..."
+
+sh -c "aws s3 sync $S3_SOURCE_DIR s3://$AWS_S3_BUCKET/$DESTINATION_DIR $([ "$USE_GZIP_COMPRESSION" = true ] && echo "--content-encoding gzip" || echo "") $*"
 
 if [ -n "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
   echo "Creating CloudFront invalidation"
