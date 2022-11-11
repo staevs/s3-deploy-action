@@ -31,15 +31,8 @@ fi
 
 if [ "$USE_GZIP_COMPRESSION" = true ]; then
   echo "Gzipping files..."
-  echo "./$S3_SOURCE_DIR"
-  echo "$PWD/$S3_SOURCE_DIR"
-  echo "$(pwd)/S3_SOURCE_DIR"
 
-  touch test.md
-
-  ls -la $S3_SOURCE_DIR
-
-  ls -la
+  find "./$S3_SOURCE_DIR" -type f
 
   find "./$S3_SOURCE_DIR" -type f -exec gzip "{}" \; -exec mv "{}.gz" "{}" \;
 fi
