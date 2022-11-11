@@ -51,3 +51,4 @@ jobs:
 | S3_DESTINATION_DIR         | false (defaults to S3 root) | Path to folder in a S3 bucket                                                                                    |
 | CLOUDFRONT_DISTRIBUTION_ID | false                       | Your CloudFront distribution                                                                                     |
 | CLOUDFRONT_PATHS           | false (defaults to /*)      | The paths to invalidate (relative to the distribution)                                                           |
+| USE_GZIP                   | false (defaults to false)   | Use gzip for upload                                                                                              |
