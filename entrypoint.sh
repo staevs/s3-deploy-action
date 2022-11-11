@@ -32,8 +32,6 @@ fi
 if [ "$USE_GZIP_COMPRESSION" = true ]; then
   echo "Gzipping files..."
 
-  find "./$S3_SOURCE_DIR" -type f
-
   find "./$S3_SOURCE_DIR" -type f -exec gzip "{}" \; -exec mv "{}.gz" "{}" \;
 fi
 
