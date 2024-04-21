@@ -1,4 +1,4 @@
-FROM amazon/aws-cli:2.11.26
+FROM amazon/aws-cli:2.15.40
 
 RUN yum -y install gzip
 
