@@ -48,7 +48,7 @@ jobs:
 | AWS_REGION                 | true                        | Your AWS Region                                                                                                  |
 | AWS_S3_BUCKET              | true                        | Your S3 Bucket name                                                                                              |
 | S3_SOURCE_DIR              | true                        | Path to local folder                                                                                             |
-| S3_DESTINATION_DIR         | false (defaults to S3 root) | Path to folder in a S3 bucket                                                                                    |
+| DESTINATION_DIR            | false (defaults to S3 root) | Path to folder in a S3 bucket                                                                                    |
 | CLOUDFRONT_DISTRIBUTION_ID | false                       | Your CloudFront distribution                                                                                     |
 | CLOUDFRONT_PATHS           | false (defaults to /*)      | The paths to invalidate (relative to the distribution)                                                           |
 | USE_GZIP_COMPRESSION       | false (defaults to false)   | Use gzip for upload                                                                                              |
